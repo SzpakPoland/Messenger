@@ -81,7 +81,7 @@ W powłoce `mongosh`:
 use admin
 db.createUser({
   user: "komunikatorAdmin",
-  pwd: "ZMIEN_NA_BEZPIECZNE_HASLO",
+  pwd: "haslo123",
   roles: [{ role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase"]
 })
 exit
@@ -209,8 +209,7 @@ pm2 start backend/src/server.js --name "gk-backend" --env production
 
 # Frontend (Next.js standalone)
 pm2 start npm --name "gk-frontend" -- start --prefix frontend
-
-# Zapisz konfigurację PM2 (autostart po restarcie)
+    # albo przez ecosystem.config.js (zalecane — ustawia PORT=3001 automatycznie):
 pm2 save
 pm2 startup systemd
 # Skopiuj i wykonaj wyświetlone polecenie sudo
@@ -243,7 +242,7 @@ server {
 
     # ── Frontend (Next.js) ──────────────────────────────
     location / {
-        proxy_pass http://localhost:3000;
+        proxy_pass http://localhost:3001;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -465,7 +464,7 @@ sudo certbot --nginx -d mmm3000m3.pl
 |--------------|-------|-------------------------------|
 | Nginx        | 80    | HTTP (redirect do HTTPS)      |
 | Nginx        | 443   | HTTPS (proxy do 3000 i 5000)  |
-| Next.js      | 3000  | Frontend (tylko localhost)    |
+| Next.js      | 3001  | Frontend (tylko localhost)    |
 | Express      | 5000  | Backend + Socket.io (tylko localhost) |
 | MongoDB      | 27017 | Baza danych (tylko localhost) |
 
