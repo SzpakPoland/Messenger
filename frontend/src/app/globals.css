@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --sidebar-width: 320px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#__next {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #0f172a;
+  color: #f1f5f9;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white font-medium px-4 py-2.5 rounded-xl transition-all duration-150 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-ghost {
+    @apply hover:bg-white/5 active:bg-white/10 text-slate-300 hover:text-white font-medium px-3 py-2 rounded-xl transition-all duration-150 flex items-center justify-center gap-2;
+  }
+
+  .input-field {
+    @apply bg-surface-800 border border-white/10 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50 transition-all duration-150 w-full;
+  }
+
+  .card {
+    @apply bg-surface-800 border border-white/[0.06] rounded-2xl;
+  }
+
+  .message-bubble-self {
+    @apply bg-gradient-to-br from-brand-600 to-violet-600 text-white rounded-2xl rounded-br-sm px-4 py-2.5 max-w-xs lg:max-w-md break-words;
+  }
+
+  .message-bubble-other {
+    @apply bg-surface-800 text-slate-100 rounded-2xl rounded-bl-sm px-4 py-2.5 max-w-xs lg:max-w-md break-words;
+  }
+
+  .sidebar-item {
+    @apply flex items-center gap-3 px-3 py-3 rounded-xl cursor-pointer transition-all duration-150 hover:bg-white/5 select-none;
+  }
+
+  .sidebar-item-active {
+    @apply bg-brand-600/20 border border-brand-500/20;
+  }
+}
+
+.typing-dot {
+  width: 6px;
+  height: 6px;
+  background: #94a3b8;
+  border-radius: 50%;
+  display: inline-block;
+  animation: typingBounce 1.2s ease-in-out infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-6px); }
+}
